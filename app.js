@@ -8,6 +8,34 @@ $(document).ready(function() {
         }
         });
     });
+    
+    $('#addUser').on('click', function(e) {
+        e.preventDefault();
+        var userName = $('#name').val();
+        var userJob = $('#job').val();
+        return $.ajax({
+            url:'http://reqr.es/api/users',
+            method: 'POST',
+            data: {name: userName , job: userJob},
+            success: function(res) {
+                $('#recentUser').html(
+          '<li>' +
+            'name: ' + res.name +
+          '</li>' +
+          '<li>' +
+            'job: ' + res.job +
+          '</li>' +
+          '<li>' +
+            'id: ' + res.id +
+          '</li>' +
+          '<li>' +
+            'created at: ' + res.createdAt +
+          '</li>'
+        )
+      }
+    })
+  });
+    
 var insertData = function(arr) {
     for (var i = 0; i < arr.length; i++) {
       $('#userInfo' + (i + 1)).html('<div>' +
